@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Blogpost</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1 class="text-gradient">New Post</h1>
+    <form action="/add" method="POST">
+        <label for="author">Author:</label>
+        <input type="text" id="author" name="author" required><br><br>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required><br><br>
+        <label for="content">Text:</label>
+        <input type="text" id="content" name="content" required><br><br>
+        <input type="submit" value="Speichern">
+
+        {% if errors %}
+            <div style="color: red;">
+                {% for error in errors %}
+                    {{ error }}<br>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </form>
+    <a href="/">Posts</a>
+</body>
+</html>
+
