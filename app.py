@@ -1,5 +1,6 @@
-from flask import Flask, render_template, jsonify, request, redirect, url_for
 import json
+from flask import Flask, render_template, request, redirect, url_for
+
 
 app = Flask(__name__)
 
@@ -11,8 +12,9 @@ def read_posts(posts_file='posts.json'):
 
 
 def write_posts(blog_posts, posts_file='posts.json'):
+    sorted_blog_posts = sorted(blog_posts, key=lambda post: post["id"])
     with open(posts_file, 'w', encoding='utf-8') as datei:
-        json.dump(blog_posts, datei, indent=4, ensure_ascii=False)
+        json.dump(sorted_blog_posts, datei, indent=4, ensure_ascii=False)
 
 
 def fetch_post_by_id(post_id):
@@ -20,7 +22,7 @@ def fetch_post_by_id(post_id):
     return post
 
 
-def request_post(post_id=""):
+def request_post(post_id="", likes=0):
     author = request.form.get('author')
     title = request.form.get('title')
     content = request.form.get('content')
@@ -39,11 +41,17 @@ def request_post(post_id=""):
         blog_posts = read_posts()
         post_id = max(p["id"] for p in blog_posts) + 1 if blog_posts else 1
 
+    post = build_post(post_id, author, title, content, likes)
+    return post
+
+
+def build_post(post_id, author, title, content, likes=0):
     post = {
         "id": post_id,
         "author": author,
         "title": title,
-        "content": content}
+        "content": content,
+        "likes": likes}
     return post
 
 
@@ -83,19 +91,48 @@ def update(post_id):
         # Post not found
         return "Post not found", 404
 
+    if "likes" in post:
+        likes = post["likes"]
+    else:
+        likes = 0
+
     if request.method == 'POST':
-        post = fetch_post_by_id(post_id)
         blog_posts = read_posts()
         blog_posts.remove(post)
+        # To keep the likes: new_post = request_post(post_id, likes)
         new_post = request_post(post_id)
         if isinstance(new_post, list):
-            return render_template('update.html', errors=new_post)
+            return render_template(
+                'update.html', post_id=post_id, post=post, errors=new_post)
 
         blog_posts.append(new_post)
         write_posts(blog_posts)
         return redirect(url_for('index'))
 
-    return render_template('update.html', post=post)
+    return render_template('update.html', post_id=post_id, post=post)
+
+
+@app.route('/like/<int:post_id>', methods=['POST'])
+def likes(post_id):
+    post = fetch_post_by_id(post_id)
+    if post is None:
+        # Post not found
+        return "Post not found", 404
+
+    blog_posts = read_posts()
+    blog_posts.remove(post)
+
+    if "likes" in post:
+        likes = post["likes"] + 1
+    else:
+        likes = 1
+
+    post = build_post(
+        post["id"], post["author"], post["title"], post["content"], likes)
+
+    blog_posts.append(post)
+    write_posts(blog_posts)
+    return redirect(url_for('index'))
 
 
 

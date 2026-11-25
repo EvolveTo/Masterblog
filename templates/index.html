@@ -11,7 +11,19 @@
     <a href="{{ url_for('add') }}" class="text-gradient">+ New Post</a>
     {% for post in posts %}
     <div class="post">
-        <h2>{{ post['title'] }}</h2>
+        <div class="row">
+            <h2>{{ post['title'] }}</h2>
+
+            {% if not post.likes %}
+                <form action="{{ url_for('likes', post_id=post.id) }}" method="POST">
+                    <a><button type="submit">❤</button></a>
+                </form>
+            {% else %}
+                <form action="{{ url_for('likes', post_id=post.id) }}" method="POST">
+                    <a><button type="submit">{{ post.likes }} ❤️</button></a>
+                </form>
+            {% endif %}
+        </div>
         <p><em>Written by {{ post['author'] }}</em></p>
         <p>{{ post['content'] }}</p>
         <div class="row">
@@ -25,3 +37,12 @@
     {% endfor %}
 </body>
 </html>
+
+
+{% if errors %}
+            <div style="color: red;">
+                {% for error in errors %}
+                    {{ error }}<br>
+                {% endfor %}
+            </div>
+        {% endif %}
