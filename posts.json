@@ -1,11 +1,56 @@
 [
-    {"id": 1, "author": "John Doe", "title": "First Post", "content": "This is my first post."},
-    {"id": 2, "author": "Jane Doe", "title": "Second Post", "content": "This is another post."},
-    {"id": 3, "author": "Peter Parker", "title": "Hello World", "content": "First Post"},
-    {"id": 4, "author": "Mary Jane Watson", "title": "Me Too", "content": "Second Post"},
-    {"id": 5, "author": "Ben Parker", "title": "Words to Live By", "content": "With great power comes great responsibility"},
-    {"id": 6, "author": "Tony Stark", "title": "Lab Update", "content": "Just finished a new invention in the lab"},
-    {"id": 7, "author": "Betty Brant", "title": "Coffee Break", "content": "Anyone up for coffee at the Daily Bugle?"},
-    {"id": 8, "author": "Harry Osborn", "title": "Learning Flask", "content": "Flask APIs are fun to build"},
-    {"id": 9, "author": "J. Jonah Jameson", "title": "Urgent Request", "content": "Need photos of Spider-Man, ASAP!"}
+    {
+        "id": 1,
+        "author": "John Doe",
+        "title": "First Post",
+        "content": "This is my first post."
+    },
+    {
+        "id": 2,
+        "author": "Jane Doe",
+        "title": "Second Post",
+        "content": "This is another post."
+    },
+    {
+        "id": 4,
+        "author": "Mary Jane Watson",
+        "title": "Me Too",
+        "content": "Second Post"
+    },
+    {
+        "id": 5,
+        "author": "Ben Parker",
+        "title": "Words to Live By",
+        "content": "With great power comes great responsibility"
+    },
+    {
+        "id": 6,
+        "author": "Tony Stark",
+        "title": "Lab Update",
+        "content": "Just finished a new invention in the lab"
+    },
+    {
+        "id": 7,
+        "author": "Betty Brant",
+        "title": "Coffee Break",
+        "content": "Anyone up for coffee at the Daily Bugle?"
+    },
+    {
+        "id": 8,
+        "author": "Harry Osborn",
+        "title": "Learning Flask",
+        "content": "Flask APIs are fun to build"
+    },
+    {
+        "id": 9,
+        "author": "J. Jonah Jameson",
+        "title": "Urgent Request",
+        "content": "Need photos of Spider-Man, ASAP!"
+    },
+    {
+        "id": 3,
+        "author": "Peter Parker",
+        "title": "Hello World",
+        "content": "First Post."
+    }
 ]

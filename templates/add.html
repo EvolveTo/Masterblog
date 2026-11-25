@@ -14,8 +14,11 @@
         <input type="text" id="title" name="title" required><br><br>
         <label for="content">Text:</label>
         <input type="text" id="content" name="content" required><br><br>
-        <input type="submit" value="Speichern">
+        <div class="row">
+            <a href="/"><button type="button">&lt; Posts</button></a>
 
+            <input type="submit" value="Save">
+        </div>
         {% if errors %}
             <div style="color: red;">
                 {% for error in errors %}
@@ -24,6 +27,8 @@
             </div>
         {% endif %}
     </form>
-    <a href="/">Posts</a>
+
 </body>
 </html>
+
+

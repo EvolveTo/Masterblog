@@ -7,13 +7,20 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Welcome to My Flask Blog!</h1>
+    <h1 class="text-gradient">Welcome to My Flask Blog!</h1>
     <a href="{{ url_for('add') }}" class="text-gradient">+ New Post</a>
     {% for post in posts %}
     <div class="post">
         <h2>{{ post['title'] }}</h2>
         <p><em>Written by {{ post['author'] }}</em></p>
         <p>{{ post['content'] }}</p>
+        <div class="row">
+            <a href="{{ url_for('update', post_id=post.id) }}"><button type="button">Bearbeiten</button></a>
+
+            <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
+                <input type="submit" value="Delete">
+            </form>
+        </div>
     </div>
     {% endfor %}
 </body>
